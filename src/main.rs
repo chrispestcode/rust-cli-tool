@@ -12,13 +12,8 @@ fn main() {
     let args =  Cli::parse();
     
     println!("pattern {:?}, path: {:?}", args.pattern, args.path);
-
-    let result = std::fs::read_to_string(&args.path);
     
-    let content = match result {
-        Ok(content)  => {content}
-        Err(error) => {panic!("Error found: {} ", error);}
-    };
+    let content = std::fs::read_to_string(&args.path).unwrap();
     
     for line in content.lines() {
         if line.contains(&args.pattern) {
